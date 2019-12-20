@@ -8,6 +8,8 @@ namespace NoMoreLegs
 
         [SerializeField] private Hook _hook;
         [SerializeField] private float _speed;
+        [SerializeField] private float _collisionTreshold = 0.5f;
+
         #endregion
 
         #region PRIVATE_VARIABLES
@@ -15,6 +17,12 @@ namespace NoMoreLegs
         private Camera _camera;
         private PlayerController _playerController;
         private Vector3 _direction;
+        private Rigidbody2D _target;
+        private Transform _targetTransform;
+        private bool _reachedPosition;
+        private Vector3 _targetPosition;
+        private int _layerMask;
+        private float _gravityScale = 1;
 
         #endregion
 
@@ -28,28 +36,46 @@ namespace NoMoreLegs
         {
             _camera = Camera.main;
             _playerController = gameObject.GetComponent<PlayerController>();
+            _target = gameObject.GetComponent<Rigidbody2D>();
+            _targetTransform = _playerController.transform;
+            _layerMask = LayerMask.GetMask("Wall", "Enemy");
         }
 
         public override void OnButtonDown()
         {
             var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
-            var playerPosition = _playerController.transform.position;
+            var position = _targetTransform.position;
+            var playerPosition = position;
             _direction = (mousePosition - playerPosition).normalized;
-            _playerController.OnMove(_direction * _speed);
+            _reachedPosition = false;
+            RaycastHit2D info = Physics2D.Raycast(position, _direction, Mathf.Infinity, _layerMask);
             
+            if (info.collider != null)
+            {
+                _target.velocity = _direction * _speed;
+                _targetPosition = info.point;
+                _target.gravityScale = 0;
+            }
         }
 
         public override void OnButtonUp()
         {
-            _playerController.OnMove(Vector3.zero);
+            _target.velocity = Vector2.zero;
+            _target.gravityScale = _gravityScale;
         }
 
         public override void RunBehaviour()
         {
-            
+            if (!_reachedPosition)
+            {
+                if ((_targetTransform.position - _targetPosition).sqrMagnitude < _collisionTreshold)
+                {
+                    _reachedPosition = true;
+                    _target.velocity = Vector2.zero;
+                }
+            }
         }
 
         #endregion
     }
-
 }

@@ -6,12 +6,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private ButtonDownListener[] _buttonDownListeners;
     private MovableObject _movableObject;
-    private Rigidbody2D _rigidbody2D;
 
     private void Awake()
     {
         _movableObject = GetComponent<MovableObject>();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
 
@@ -29,10 +27,5 @@ public class PlayerController : MonoBehaviour
         {
             _buttonDownListeners[i].RunListener();
         }
-    }
-
-    public void OnMove(Vector3 velocity)
-    {
-        _rigidbody2D.velocity = velocity;
     }
 }
