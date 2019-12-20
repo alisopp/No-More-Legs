@@ -1,18 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using NoMoreLegs;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private ButtonDownListener[] _buttonDownListeners;
+    private MovableObject _movableObject;
+
+    private void Awake()
     {
-        
+        _movableObject = GetComponent<MovableObject>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Start()
     {
-        
+        for (int i = 0; i < _buttonDownListeners.Length; i++)
+        {
+            _buttonDownListeners[i].Init(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < _buttonDownListeners.Length; i++)
+        {
+            _buttonDownListeners[i].RunListener();
+        }
     }
 }
