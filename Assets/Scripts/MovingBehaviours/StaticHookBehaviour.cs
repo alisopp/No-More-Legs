@@ -60,7 +60,7 @@ namespace NoMoreLegs
 
         public override void OnButtonUp()
         {
-            _target.velocity = Vector2.zero;
+            //_target.velocity = Vector2.zero;
             _target.gravityScale = _gravityScale;
         }
 
