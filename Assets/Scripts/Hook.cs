@@ -18,6 +18,7 @@ namespace NoMoreLegs
         private Vector3 _startPosition;
         private float _sqrtMaxRange;
         private IHookListener _hookListener;
+        private int _wallLayer;
         private PositionConstraint _positionConstraint;
         
 
@@ -31,24 +32,30 @@ namespace NoMoreLegs
             _rigidbody2D.isKinematic = true;
             _positionConstraint = GetComponent<PositionConstraint>();
             enabled = false;
+            _wallLayer = LayerMask.NameToLayer("Wall");
         }
 
         private void FixedUpdate()
         {
             if ((_startPosition - transform.position).sqrMagnitude > _sqrtMaxRange)
             {
-                _rigidbody2D.velocity = Vector2.zero;
-                _rigidbody2D.isKinematic = true;
-                _hookListener.OnFailedReachedPosition();
-                //transform.localPosition = Vector3.zero;
-                _positionConstraint.constraintActive = true;
-                enabled = false;
+                OnHookFailed();
             }
         }
 
         #endregion
 
         #region METHODS
+
+        private void OnHookFailed()
+        {
+            _rigidbody2D.velocity = Vector2.zero;
+            _rigidbody2D.isKinematic = true;
+            _hookListener.OnFailedReachedPosition();
+            //transform.localPosition = Vector3.zero;
+            _positionConstraint.constraintActive = true;
+            enabled = false;
+        }
 
         public void ResetHook()
         {
@@ -59,9 +66,7 @@ namespace NoMoreLegs
 
         public void SetHookListener(IHookListener hookListener)
         {
-            ConstraintSource source = new ConstraintSource();
-            source.sourceTransform = hookListener.GetTransform();
-            source.weight = 1f;
+            ConstraintSource source = new ConstraintSource {sourceTransform = hookListener.GetTransform(), weight = 1f};
             _positionConstraint.AddSource(source);
             _hookListener = hookListener;
             _positionConstraint.constraintActive = true;
@@ -75,15 +80,25 @@ namespace NoMoreLegs
             _startPosition = transform.position;
             _sqrtMaxRange = sqrtMaxRange;
             _positionConstraint.constraintActive = false;
+            float angle = (Mathf.Atan2(velocity.y, velocity.x) + (Mathf.PI / 2.0f)) * Mathf.Rad2Deg;
+            transform.eulerAngles = new Vector3(0, 0, angle - 90);
             enabled = true;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            _rigidbody2D.velocity = Vector2.zero;
-            _rigidbody2D.isKinematic = true;
-            enabled = false;
-            _hookListener.OnHookReachedPosition(other.ClosestPoint(transform.position));
+            if (other.gameObject.layer == _wallLayer)
+            {
+                _rigidbody2D.velocity = Vector2.zero;
+                _rigidbody2D.isKinematic = true;
+                enabled = false;
+                _hookListener.OnHookReachedPosition(other.ClosestPoint(transform.position));
+            }
+            else
+            {
+                OnHookFailed();
+            }
+
         }
 
         #endregion
