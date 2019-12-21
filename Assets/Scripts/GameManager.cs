@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
+using Cinemachine;
 
 namespace NoMoreLegs
 {
@@ -11,7 +12,7 @@ namespace NoMoreLegs
 
         [SerializeField] private PlayerController _playerPrefab;
         [SerializeField] private Transform _startPosition;
-
+        [SerializeField] private CinemachineVirtualCamera _virtualCamera;
         #endregion
 
         #region PRIVATE_VARIABLES
@@ -62,6 +63,9 @@ namespace NoMoreLegs
                 _currentPlayer = Instantiate(_playerPrefab.gameObject).GetComponent<PlayerController>();
                 _currentPlayer.transform.position = _startPosition.position;
                 _isStarted = true;
+                var vcam = _virtualCamera; //cinemachine reference
+                vcam.LookAt = _currentPlayer.transform;
+                vcam.Follow = _currentPlayer.transform;
                 ResumeGame();
             }
 
