@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonDownListeners:
-  - _movingBehaviour: {fileID: 950821721}
+  - _movingBehaviour: {fileID: 950821722}
     _button: Fire1
 --- !u!50 &398162799
 Rigidbody2D:
@@ -276,6 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 950821720}
   - component: {fileID: 950821721}
+  - component: {fileID: 950821722}
   m_Layer: 8
   m_Name: StaticHook
   m_TagString: Untagged
@@ -307,6 +308,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a9b353fc0d849bf900ac9d41ce4ed5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &950821722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950821719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327d8cc7526e8754099a16fc805a948e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _hook: {fileID: 0}
