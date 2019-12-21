@@ -59,6 +59,8 @@ GameObject:
   - component: {fileID: 2309793137406737601}
   - component: {fileID: 2309793137406737600}
   - component: {fileID: 2309793137406737631}
+  - component: {fileID: 5621513110602159187}
+  - component: {fileID: 147801105692487026}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -142,9 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf47a8111025a04dae98806323046d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buttonDownListeners:
-  - _movingBehaviour: {fileID: 2309793137021969654}
-    _button: Fire1
 --- !u!50 &2309793137406737600
 Rigidbody2D:
   serializedVersion: 4
@@ -160,7 +159,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -182,3 +181,33 @@ CapsuleCollider2D:
   m_Offset: {x: -0.69, y: 0.82}
   m_Size: {x: 2.82, y: 7.61}
   m_Direction: 0
+--- !u!114 &5621513110602159187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309793137406737604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de87346ebbac464899161b5d1e803602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonDownListeners:
+  - _movingBehaviour: {fileID: 2309793137021969654}
+    _button: Fire1
+--- !u!114 &147801105692487026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309793137406737604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2475430439641543b5ff8534c805194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runSpeed: 20
+  jumpForce: 100
+  grounded: 0
