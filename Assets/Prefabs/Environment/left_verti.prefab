@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1111690875488598072}
   - component: {fileID: 8414048677653955643}
   m_Layer: 9
-  m_Name: right_vertical
+  m_Name: left_verti
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +90,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 9118211967444060339}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5ad757c54fa037a4498b41db1f81caf7, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

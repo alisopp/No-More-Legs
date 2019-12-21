@@ -48,3 +48,4 @@ MonoBehaviour:
   _speed: 20
   _collisionTreshold: 1
   _maximumDistance: 400
+  _gravityScale: 0.5
