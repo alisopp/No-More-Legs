@@ -3,28 +3,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private ButtonDownListener[] _buttonDownListeners;
     private MovableObject _movableObject;
+    private PlayerHookController _playerHookController;
+    private start_movement _startMovement;
 
     private void Awake()
     {
-        _movableObject = GetComponent<MovableObject>();
+        _playerHookController = GetComponent<PlayerHookController>();
+        _startMovement = GetComponent<start_movement>();
+        _playerHookController.enabled = false;
+        _startMovement.enabled = true;
     }
 
-    private void Start()
-    {
-        for (int i = 0; i < _buttonDownListeners.Length; i++)
-        {
-            _buttonDownListeners[i].Init(gameObject);
-        }
-    }
 
-    private void Update()
+    public void LoseLegs()
     {
-        for (int i = 0; i < _buttonDownListeners.Length; i++)
-        {
-            _buttonDownListeners[i].RunListener();
-        }
+        _playerHookController.enabled = true;
+        _startMovement.enabled = false;
     }
 }

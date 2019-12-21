@@ -24,6 +24,8 @@ namespace NoMoreLegs
         private List<IGameWinListener> _gameWinListeners;
         private List<IGameLoseListener> _gameLoseListeners;
 
+        public PlayerController CurrentPlayer => _currentPlayer;
+
         #endregion
 
         #region UNITY_LIFECYCLE
@@ -49,6 +51,7 @@ namespace NoMoreLegs
 
         #region METHODS
 
+        
 
         public void StartGame()
         {

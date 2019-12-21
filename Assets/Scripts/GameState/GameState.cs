@@ -7,6 +7,13 @@ namespace NoMoreLegs.GameState
     {
         [SerializeField] protected StateTransition[] _transitions;
 
+        public void Init()
+        {
+            for (int i = 0; i < _transitions.Length; i++)
+            {
+                _transitions[i].Transition.Init();
+            }
+        }
 
         public virtual void OnStateEnter()
         {

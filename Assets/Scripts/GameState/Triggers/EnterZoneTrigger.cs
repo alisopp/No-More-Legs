@@ -23,6 +23,14 @@ namespace NoMoreLegs.GameState.Triggers
             _triggerListeners = new List<ITriggerListener>();
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            for (int i = 0; i < _triggerListeners.Count; i++)
+            {
+                _triggerListeners[i].OnTriggerEnter();
+            }
+        }
+
         #endregion
 
         #region METHODS
