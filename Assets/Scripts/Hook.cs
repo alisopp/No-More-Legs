@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Interfaces;
 using UnityEngine;
 using UnityEngine.Animations;
+using Debug = UnityEngine.Debug;
 
 namespace NoMoreLegs
 {
@@ -20,7 +21,6 @@ namespace NoMoreLegs
         private IHookListener _hookListener;
         private int _wallLayer;
         private PositionConstraint _positionConstraint;
-        
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace NoMoreLegs
 
         private void FixedUpdate()
         {
-            if ((_startPosition - transform.position).sqrMagnitude > _sqrtMaxRange)
+            if (enabled && (_startPosition - transform.position).sqrMagnitude > _sqrtMaxRange)
             {
                 OnHookFailed();
             }
@@ -55,6 +55,7 @@ namespace NoMoreLegs
             //transform.localPosition = Vector3.zero;
             _positionConstraint.constraintActive = true;
             enabled = false;
+            Debug.Log("Hook failed");
         }
 
         public void ResetHook()
@@ -62,6 +63,7 @@ namespace NoMoreLegs
             _rigidbody2D.velocity = Vector2.zero;
             _rigidbody2D.isKinematic = true;
             _positionConstraint.constraintActive = true;
+            Debug.Log("Reset Hook");
         }
 
         public void SetHookListener(IHookListener hookListener)
@@ -71,7 +73,7 @@ namespace NoMoreLegs
             _hookListener = hookListener;
             _positionConstraint.constraintActive = true;
         }
-        
+
 
         public void ShootHook(Vector3 velocity, float sqrtMaxRange)
         {
@@ -87,21 +89,23 @@ namespace NoMoreLegs
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.layer == _wallLayer)
+            if (enabled)
             {
-                _rigidbody2D.velocity = Vector2.zero;
-                _rigidbody2D.isKinematic = true;
-                enabled = false;
-                _hookListener.OnHookReachedPosition(other.ClosestPoint(transform.position));
+                if (other.gameObject.layer == _wallLayer)
+                {
+                    _rigidbody2D.velocity = Vector2.zero;
+                    _rigidbody2D.isKinematic = true;
+                    enabled = false;
+                    _hookListener.OnHookReachedPosition(other.ClosestPoint(transform.position));
+                    Debug.Log("Hook reached");
+                }
+                else
+                {
+                    OnHookFailed();
+                }
             }
-            else
-            {
-                OnHookFailed();
-            }
-
         }
 
         #endregion
     }
-
 }

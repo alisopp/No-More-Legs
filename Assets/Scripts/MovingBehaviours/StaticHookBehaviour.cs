@@ -64,6 +64,7 @@ namespace NoMoreLegs
         {
             //_target.velocity = Vector2.zero;
             var velocity = _target.velocity;
+            Debug.Log("Is Not Kinematic");
             _target.isKinematic = false;
             _target.velocity = velocity;
             _target.gravityScale = _gravityScale;
@@ -89,6 +90,7 @@ namespace NoMoreLegs
             _target.velocity = direction * _speed;
             _target.gravityScale = 0;
             _reachedPosition = false;
+            Debug.Log("Is Kinematic");
             _target.isKinematic = true;
         }
         
