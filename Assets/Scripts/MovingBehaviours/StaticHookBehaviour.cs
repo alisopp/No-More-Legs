@@ -62,7 +62,7 @@ namespace NoMoreLegs
 
         public override void OnButtonUp()
         {
-            _target.velocity = Vector2.zero;
+            //_target.velocity = Vector2.zero; (stop moving when hooking)
             _target.gravityScale = _gravityScale;
             _target.isKinematic = false;
             _reachedPosition = false;
@@ -76,7 +76,7 @@ namespace NoMoreLegs
                 if ((_targetTransform.position - _hook.transform.position).sqrMagnitude < _collisionTreshold)
                 {
                     _reachedPosition = true;
-                    _target.velocity = Vector2.zero;
+                    _target.velocity = Vector2.zero; 
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace NoMoreLegs
             _reachedPosition = false;
             _target.isKinematic = true;
         }
-
+        
         public void OnFailedReachedPosition()
         {
             
