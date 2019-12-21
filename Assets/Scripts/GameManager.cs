@@ -21,7 +21,8 @@ namespace NoMoreLegs
 
         private PlayerController _currentPlayer;
         private bool _isPaused;
-        private List<IGameEndListener> _gameEndListeners = new List<IGameEndListener>();
+        private List<IGameWinListener> _gameWinListeners;
+        private List<IGameLoseListener> _gameLoseListeners;
 
         #endregion
 
@@ -34,7 +35,14 @@ namespace NoMoreLegs
 
         private void Awake()
         {
+            _gameWinListeners  = new List<IGameWinListener>();
+            _gameLoseListeners = new List<IGameLoseListener>();
             _instance = this;
+        }
+
+        private void Start()
+        {
+            PauseGame();
         }
 
         #endregion
@@ -46,22 +54,35 @@ namespace NoMoreLegs
         {
             _currentPlayer = Instantiate(_playerPrefab.gameObject).GetComponent<PlayerController>();
             _currentPlayer.transform.position = _startPosition.position;
+            ResumeGame();
         }
 
         public void EndGame(bool wonGame)
         {
             if (wonGame)
             {
-                for (int i = 0; i < _gameEndListeners.Count; i++)
+                for (int i = 0; i < _gameWinListeners.Count; i++)
                 {
-                    _gameEndListeners[i].OnGameEnd();
+                    _gameWinListeners[i].OnGameWin();
                 }
             }
             else
             {
-                
+                for (int i = 0; i < _gameLoseListeners.Count; i++)
+                {
+                    _gameLoseListeners[i].OnGameLose();
+                }
             }
+        }
 
+        public void OnDamageCollision(GameObject gameObject)
+        {
+            if (gameObject == _currentPlayer.gameObject)
+            {
+                EndGame(false);
+                //TODO change to use an animation instead
+                Destroy(_currentPlayer.gameObject);
+            }
         }
 
         public void ResumeGame()
@@ -83,6 +104,16 @@ namespace NoMoreLegs
             {
                 PauseGame();
             }
+        }
+
+        public void AddGameWinListener(IGameWinListener listener)
+        {
+            _gameWinListeners.Add(listener);
+        }
+
+        public void AddGameLoseListener(IGameLoseListener listener)
+        {
+            _gameLoseListeners.Add(listener);
         }
 
         #endregion

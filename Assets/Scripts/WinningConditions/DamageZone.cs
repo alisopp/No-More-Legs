@@ -1,26 +1,18 @@
-using System;
 using UnityEngine;
 
 namespace NoMoreLegs.Winning
 {
-    public class WinningZone : MonoBehaviour
+    public class DamageZone : MonoBehaviour
     {
         #region EDITOR_VARIABLES
 
         #endregion
 
         #region PRIVATE_VARIABLES
-        
-        
 
         #endregion
 
         #region UNITY_LIFECYCLE
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawSphere(transform.position, 2f);
-        }
 
         #endregion
 
@@ -28,7 +20,7 @@ namespace NoMoreLegs.Winning
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            GameManager.GetInstance().EndGame(true);
+            GameManager.GetInstance().OnDamageCollision(other.gameObject);
         }
 
         #endregion
