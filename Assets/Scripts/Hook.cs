@@ -80,7 +80,8 @@ namespace NoMoreLegs
             _startPosition = transform.position;
             _sqrtMaxRange = sqrtMaxRange;
             _positionConstraint.constraintActive = false;
-            transform.rotation = Quaternion.LookRotation(velocity, Vector3.up);
+            float angle = (Mathf.Atan2(velocity.y, velocity.x) + (Mathf.PI / 2.0f)) * Mathf.Rad2Deg;
+            transform.eulerAngles = new Vector3(0, 0, angle - 90);
             enabled = true;
         }
 

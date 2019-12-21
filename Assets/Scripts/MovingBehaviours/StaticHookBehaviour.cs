@@ -62,10 +62,12 @@ namespace NoMoreLegs
 
         public override void OnButtonUp()
         {
-            _target.velocity = Vector2.zero;
+            //_target.velocity = Vector2.zero;
+            var velocity = _target.velocity;
             _target.isKinematic = false;
+            _target.velocity = velocity;
             _target.gravityScale = _gravityScale;
-            _reachedPosition = false;
+            _reachedPosition = true;
             _hook.ResetHook();
         }
 
