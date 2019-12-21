@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NoMoreLegs
 {
-    public class MovableObject : MonoBehaviour, IHookListener
+    public class MovableObject : MonoBehaviour
     {
         #region EDITOR_VARIABLES
 
