@@ -12,7 +12,7 @@ namespace NoMoreLegs
         [SerializeField] private float _speed;
         [SerializeField] private float _collisionTreshold = 0.5f;
         [SerializeField] private float _maximumDistance = 10;
-
+        [SerializeField]  private float _gravityScale = 0.5f;
         #endregion
 
         #region PRIVATE_VARIABLES
@@ -26,7 +26,7 @@ namespace NoMoreLegs
         private bool _reachedPosition;
         private Vector3 _targetPosition;
         private int _layerMask;
-        private float _gravityScale = 1;
+       
         private Collider2D _collider2D;
 
         #endregion
@@ -62,10 +62,12 @@ namespace NoMoreLegs
 
         public override void OnButtonUp()
         {
-            _target.velocity = Vector2.zero;
-            _target.gravityScale = _gravityScale;
+            //_target.velocity = Vector2.zero;
+            var velocity = _target.velocity;
             _target.isKinematic = false;
-            _reachedPosition = false;
+            _target.velocity = velocity;
+            _target.gravityScale = _gravityScale;
+            _reachedPosition = true;
             _hook.ResetHook();
         }
 
