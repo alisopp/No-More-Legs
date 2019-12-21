@@ -175,12 +175,12 @@ PrefabInstance:
     - target: {fileID: 1352319139586863056, guid: cb34bc429a98e8146943035c0cb3a4d0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: 1352319139586863056, guid: cb34bc429a98e8146943035c0cb3a4d0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.45
       objectReference: {fileID: 0}
     - target: {fileID: 1352319139586863056, guid: cb34bc429a98e8146943035c0cb3a4d0,
         type: 3}
@@ -232,7 +232,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: StaticHook
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2283501898364286380, guid: cb34bc429a98e8146943035c0cb3a4d0, type: 3}
+    - {fileID: 5264678890592755515, guid: cb34bc429a98e8146943035c0cb3a4d0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cb34bc429a98e8146943035c0cb3a4d0, type: 3}
 --- !u!4 &2309793137021969655 stripped
 Transform:
