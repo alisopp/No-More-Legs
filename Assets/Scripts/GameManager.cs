@@ -21,6 +21,7 @@ namespace NoMoreLegs
 
         private PlayerController _currentPlayer;
         private bool _isPaused;
+        private bool _isStarted;
         private List<IGameWinListener> _gameWinListeners;
         private List<IGameLoseListener> _gameLoseListeners;
 
@@ -40,6 +41,7 @@ namespace NoMoreLegs
             _gameWinListeners  = new List<IGameWinListener>();
             _gameLoseListeners = new List<IGameLoseListener>();
             _instance = this;
+            _isStarted = false;
         }
 
         private void Start()
@@ -55,9 +57,14 @@ namespace NoMoreLegs
 
         public void StartGame()
         {
-            _currentPlayer = Instantiate(_playerPrefab.gameObject).GetComponent<PlayerController>();
-            _currentPlayer.transform.position = _startPosition.position;
-            ResumeGame();
+            if (!_isStarted)
+            {
+                _currentPlayer = Instantiate(_playerPrefab.gameObject).GetComponent<PlayerController>();
+                _currentPlayer.transform.position = _startPosition.position;
+                _isStarted = true;
+                ResumeGame();
+            }
+
         }
 
         public void EndGame(bool wonGame)

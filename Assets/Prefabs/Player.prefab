@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hook: {fileID: 0}
   _speed: 20
-  _collisionTreshold: 0.05
+  _collisionTreshold: 0.1
 --- !u!1 &2309793137406737604
 GameObject:
   m_ObjectHideFlags: 0
