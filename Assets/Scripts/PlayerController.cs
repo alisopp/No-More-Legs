@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
         _movableObject = GetComponent<MovableObject>();
     }
 
-
     private void Start()
     {
         for (int i = 0; i < _buttonDownListeners.Length; i++)
