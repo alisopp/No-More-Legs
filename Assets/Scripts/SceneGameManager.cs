@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class SceneGameManager : MonoBehaviour
 {
+    public static SceneGameManager Instance;
 
-    private static SceneGameManager instance;
-    
     private void Awake()
     {
-        /*if (instance =! this && instance != null)
+        if (Instance != this && Instance != null)
         {
-            Destroy(instance);
-        }*/
+            Destroy(Instance);
+        }
 
+        Instance = this;
         DontDestroyOnLoad(this);
-        
+
         loadLevel(1);
-        
     }
-    
+
     public void loadLevel(int levelnr)
     {
         if (levelnr == 0)
@@ -32,7 +31,7 @@ public class SceneGameManager : MonoBehaviour
         }
         else if (levelnr == 2)
         {
-            Application.LoadLevel("02-level1");
+            Application.LoadLevel("SampleScene");
         }
     }
 }

@@ -215,6 +215,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 5437979009720507657}
   _stealSpeed: 2
+  _stolenLegsConstraintPrefab: {fileID: 2239086025145777557, guid: 167c839c3526bb54f9d8a8a259d22028,
+    type: 3}
+  _stolenItemSpot: {fileID: 1019823187}
 --- !u!1 &5437979009846905677
 GameObject:
   m_ObjectHideFlags: 0
