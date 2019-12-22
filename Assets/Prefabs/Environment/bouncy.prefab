@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3086502406655224327}
   - component: {fileID: 7592321554230890049}
   - component: {fileID: 1365831473140855362}
-  m_Layer: 9
-  m_Name: vertical (5)
+  m_Layer: 0
+  m_Name: bouncy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

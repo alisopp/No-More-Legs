@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 6
-  jumpForce: 500
+  jumpForce: 300
   grounded: 0
 --- !u!1 &5932893612046262063
 GameObject:
