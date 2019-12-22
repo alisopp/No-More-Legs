@@ -21,6 +21,7 @@ namespace NoMoreLegs
         private IHookListener _hookListener;
         private int _wallLayer;
         private PositionConstraint _positionConstraint;
+        private AudioSource _soundEffect;
 
         #endregion
 
@@ -33,6 +34,7 @@ namespace NoMoreLegs
             _positionConstraint = GetComponent<PositionConstraint>();
             enabled = false;
             _wallLayer = LayerMask.NameToLayer("Wall");
+            _soundEffect = GetComponent<AudioSource>();
         }
 
         private void FixedUpdate()
@@ -85,6 +87,7 @@ namespace NoMoreLegs
             float angle = (Mathf.Atan2(velocity.y, velocity.x) + (Mathf.PI / 2.0f)) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, 0, angle - 90);
             enabled = true;
+            _soundEffect.Play();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
