@@ -11,6 +11,8 @@ namespace NoMoreLegs
     {
         #region EDITOR_VARIABLES
 
+        [SerializeField] private LineRenderer _lineRenderer;
+
         #endregion
 
         #region PRIVATE_VARIABLES
@@ -22,6 +24,7 @@ namespace NoMoreLegs
         private int _wallLayer;
         private PositionConstraint _positionConstraint;
         private AudioSource _soundEffect;
+        private Transform _shooterTransform;
 
         #endregion
 
@@ -29,6 +32,7 @@ namespace NoMoreLegs
 
         private void Awake()
         {
+            _shooterTransform = transform;
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _rigidbody2D.isKinematic = true;
             _positionConstraint = GetComponent<PositionConstraint>();
@@ -39,10 +43,17 @@ namespace NoMoreLegs
 
         private void FixedUpdate()
         {
-            if (enabled && (_startPosition - transform.position).sqrMagnitude > _sqrtMaxRange)
+            if (enabled)
             {
-                OnHookFailed();
+                if ((_startPosition - transform.position).sqrMagnitude > _sqrtMaxRange)
+                {
+                    OnHookFailed();
+                }
+                _lineRenderer.SetPosition(0, transform.position);
+                _lineRenderer.SetPosition(1, _shooterTransform.position);
             }
+            
+            
         }
 
         #endregion
@@ -57,6 +68,10 @@ namespace NoMoreLegs
             //transform.localPosition = Vector3.zero;
             _positionConstraint.constraintActive = true;
             enabled = false;
+            _lineRenderer.enabled = false;
+            var position = _shooterTransform.position;
+            _lineRenderer.SetPosition(0, position);
+            _lineRenderer.SetPosition(1, position);
             Debug.Log("Hook failed");
         }
 
@@ -65,11 +80,16 @@ namespace NoMoreLegs
             _rigidbody2D.velocity = Vector2.zero;
             _rigidbody2D.isKinematic = true;
             _positionConstraint.constraintActive = true;
+            _lineRenderer.enabled = false;
+            var position = _shooterTransform.position;
+            _lineRenderer.SetPosition(0, position);
+            _lineRenderer.SetPosition(1, position);
             Debug.Log("Reset Hook");
         }
 
         public void SetHookListener(IHookListener hookListener)
         {
+            _shooterTransform = hookListener.GetTransform();
             ConstraintSource source = new ConstraintSource {sourceTransform = hookListener.GetTransform(), weight = 1f};
             _positionConstraint.AddSource(source);
             _hookListener = hookListener;
@@ -86,6 +106,7 @@ namespace NoMoreLegs
             _positionConstraint.constraintActive = false;
             float angle = (Mathf.Atan2(velocity.y, velocity.x) + (Mathf.PI / 2.0f)) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, 0, angle - 90);
+            _lineRenderer.enabled = true;
             enabled = true;
             _soundEffect.Play();
         }
