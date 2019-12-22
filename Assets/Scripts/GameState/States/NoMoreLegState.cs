@@ -9,8 +9,18 @@ namespace NoMoreLegs.GameState
         [SerializeField] private RaccoonController _raccoonController;
         public override void OnStateEnter()
         {
-            GameManager.GetInstance().CurrentPlayer.StopController();
-            _raccoonController.StartStealing();
+            if(_raccoonController != null)
+            {
+                GameManager.GetInstance().CurrentPlayer.StopController();
+                _raccoonController.StartStealing();
+            }
+            else
+            {
+                GameManager.GetInstance().CurrentPlayer.StopController();
+                GameManager.GetInstance().CurrentPlayer.LoseLegs();
+                GameManager.GetInstance().CurrentPlayer.GotHook();
+            }
+
             
         }
     }
