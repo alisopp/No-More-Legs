@@ -50,3 +50,6 @@ TagManager:
   - name: Player
     uniqueID: 4269329517
     locked: 0
+  - name: Cave
+    uniqueID: 4215092319
+    locked: 0
