@@ -32,6 +32,9 @@ public class SceneGameManager : MonoBehaviour
         else if (levelnr == 2)
         {
             Application.LoadLevel("SampleScene");
+        }else if (levelnr == 3)
+        {
+            Application.LoadLevel("level2");
         }
     }
 }
