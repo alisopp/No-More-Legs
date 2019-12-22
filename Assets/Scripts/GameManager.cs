@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
@@ -11,16 +12,19 @@ namespace NoMoreLegs
         #region EDITOR_VARIABLES
 
         [SerializeField] private PlayerController _playerPrefab;
-        [SerializeField] private Transform _startPosition;
+        [SerializeField] private SpawnPoint _startPosition;
         [SerializeField] private CinemachineVirtualCamera _virtualCamera;
+        [SerializeField] private GameObject _gameOverMenu;
+        
         #endregion
 
         #region PRIVATE_VARIABLES
 
         private static GameManager _instance;
 
-
+        private SpawnPoint _spawnPoint;
         private PlayerController _currentPlayer;
+        private PlayerController _backUp;
         private bool _isPaused;
         private bool _isStarted;
         private List<IGameWinListener> _gameWinListeners;
@@ -47,7 +51,15 @@ namespace NoMoreLegs
 
         private void Start()
         {
-            PauseGame();
+            //PauseGame();
+            StartCoroutine(GameDelayed());
+        }
+
+
+        public IEnumerator GameDelayed()
+        {
+            yield return new WaitForSeconds(1f);
+            StartGame();
         }
 
         #endregion
@@ -61,7 +73,9 @@ namespace NoMoreLegs
             if (!_isStarted)
             {
                 _currentPlayer = Instantiate(_playerPrefab.gameObject).GetComponent<PlayerController>();
-                _currentPlayer.transform.position = _startPosition.position;
+                _spawnPoint = _startPosition;
+                _currentPlayer.transform.position = _startPosition.transform.position;
+                
                 _isStarted = true;
                 var vcam = _virtualCamera; //cinemachine reference
                 vcam.LookAt = _currentPlayer.transform;
@@ -95,8 +109,18 @@ namespace NoMoreLegs
             {
                 EndGame(false);
                 //TODO change to use an animation instead
-                Destroy(_currentPlayer.gameObject);
+                _currentPlayer.gameObject.SetActive(false);
+                _gameOverMenu.SetActive(true);
+                
             }
+        }
+
+        public void ResetGame()
+        {
+            _currentPlayer.transform.position = _spawnPoint.GetSpawnPosition();
+            _gameOverMenu.SetActive(false);
+            StatesManager.Instance.IncreaseTries();
+            _currentPlayer.gameObject.SetActive(true);
         }
 
         public void ResumeGame()
@@ -118,6 +142,11 @@ namespace NoMoreLegs
             {
                 PauseGame();
             }
+        }
+
+        public void SetSpawnPoint(SpawnPoint spawnPoint)
+        {
+            _spawnPoint = spawnPoint;
         }
 
         public void AddGameWinListener(IGameWinListener listener)

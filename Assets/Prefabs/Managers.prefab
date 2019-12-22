@@ -47,6 +47,7 @@ MonoBehaviour:
   _transitions:
   - Transition: {fileID: 4124394761979982641}
     FollowingGameStateIndex: 0
+  _raccoonController: {fileID: 0}
 --- !u!114 &4124394761979982641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de4ded8859f4d25ba4b3659ca54b7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trigger: {fileID: 0}
 --- !u!1 &4124394762974952851
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +200,7 @@ MonoBehaviour:
   _gameStates:
   - {fileID: 4124394762265242503}
   - {fileID: 4124394761979982640}
+  _currentIndex: 0
 --- !u!1 &4124394763584300026
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,8 +211,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4124394763584300027}
   - component: {fileID: 4124394763584300028}
-  - component: {fileID: 4124394763584300029}
-  - component: {fileID: 4124394763584300030}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -246,31 +247,5 @@ MonoBehaviour:
   _playerPrefab: {fileID: 2309793137406737601, guid: bba728e0c52ec68439a660469a52ccb9,
     type: 3}
   _startPosition: {fileID: 0}
---- !u!114 &4124394763584300029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4124394763584300026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b67d56487ee47e9ae6c3fe0b90fed30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _winningText: {fileID: 0}
-  _textToShow: Won Game
---- !u!114 &4124394763584300030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4124394763584300026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27bed85b303f4b9aaa885d875b65697d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _text: {fileID: 0}
-  _losingText: Lose Game
+  _virtualCamera: {fileID: 0}
+  _gameOverMenu: {fileID: 0}
