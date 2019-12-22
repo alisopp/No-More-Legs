@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hookPrefab: {fileID: 1368650090694802399, guid: a109daf561cf4c14ebfb13aa24021b3f,
     type: 3}
-  _speed: 20
-  _collisionTreshold: 1
-  _maximumDistance: 400
+  _speed: 30
+  _collisionTreshold: 0.4
+  _maximumDistance: 800
   _gravityScale: 0.5
