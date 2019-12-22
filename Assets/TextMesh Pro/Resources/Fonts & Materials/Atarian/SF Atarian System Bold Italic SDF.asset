@@ -52,9 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: SF Atarian System Bold Italic SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -915540194
   material: {fileID: 6429608548383713866}
-  materialHashCode: 0
+  materialHashCode: -300567339
   m_Version: 1.1.0
   m_SourceFontFileGUID: ee966bb206e03ff41b853e4c6f1574ee
   m_SourceFontFile_EditorRef: {fileID: 0}
@@ -2437,9 +2437,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
