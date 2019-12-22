@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 9716105095d687b4cacf7b84de524f84
+=======
+guid: 38b676399b7ea194eada5056fc3f628b
+>>>>>>> SceneChange
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
