@@ -15,7 +15,7 @@ namespace NoMoreLegs
         [SerializeField] private SpawnPoint _startPosition;
         [SerializeField] private CinemachineVirtualCamera _virtualCamera;
         [SerializeField] private GameObject _gameOverMenu;
-        
+
         #endregion
 
         #region PRIVATE_VARIABLES
@@ -27,6 +27,7 @@ namespace NoMoreLegs
         private PlayerController _backUp;
         private bool _isPaused;
         private bool _isStarted;
+        private bool _isWon;
         private List<IGameWinListener> _gameWinListeners;
         private List<IGameLoseListener> _gameLoseListeners;
 
@@ -43,7 +44,7 @@ namespace NoMoreLegs
 
         private void Awake()
         {
-            _gameWinListeners  = new List<IGameWinListener>();
+            _gameWinListeners = new List<IGameWinListener>();
             _gameLoseListeners = new List<IGameLoseListener>();
             _instance = this;
             _isStarted = false;
@@ -66,8 +67,6 @@ namespace NoMoreLegs
 
         #region METHODS
 
-        
-
         public void StartGame()
         {
             if (!_isStarted)
@@ -75,14 +74,13 @@ namespace NoMoreLegs
                 _currentPlayer = Instantiate(_playerPrefab.gameObject).GetComponent<PlayerController>();
                 _spawnPoint = _startPosition;
                 _currentPlayer.transform.position = _startPosition.transform.position;
-                
+
                 _isStarted = true;
                 var vcam = _virtualCamera; //cinemachine reference
                 vcam.LookAt = _currentPlayer.transform;
                 vcam.Follow = _currentPlayer.transform;
                 ResumeGame();
             }
-
         }
 
         public void EndGame(bool wonGame)
@@ -93,6 +91,9 @@ namespace NoMoreLegs
                 {
                     _gameWinListeners[i].OnGameWin();
                 }
+
+                _currentPlayer.StopController();
+                _isWon = true;
             }
             else
             {
@@ -105,18 +106,27 @@ namespace NoMoreLegs
 
         public void OnDamageCollision(GameObject gameObject)
         {
+            if (_isWon)
+            {
+                return;
+            }
+
             if (gameObject == _currentPlayer.gameObject)
             {
                 EndGame(false);
                 //TODO change to use an animation instead
                 _currentPlayer.Deactivate();
                 _gameOverMenu.SetActive(true);
-                
             }
         }
 
         public void ResetGame()
         {
+            if (_isWon)
+            {
+                return;
+            }
+
             _currentPlayer.transform.position = _spawnPoint.GetSpawnPosition();
             _gameOverMenu.SetActive(false);
             StatesManager.Instance.IncreaseTries();
@@ -127,6 +137,7 @@ namespace NoMoreLegs
         {
             Time.timeScale = 1f;
         }
+
         public void PauseGame()
         {
             Time.timeScale = 0f;
@@ -161,5 +172,4 @@ namespace NoMoreLegs
 
         #endregion
     }
-
 }

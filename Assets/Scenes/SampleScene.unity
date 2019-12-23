@@ -584,22 +584,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 654136939, guid: 207bede248af75d449512e2966e2e499, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 595781547}
-    - target: {fileID: 670845303, guid: 207bede248af75d449512e2966e2e499, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1778322721}
-    - target: {fileID: 897199205, guid: 207bede248af75d449512e2966e2e499, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 595781547}
-    - target: {fileID: 1198671235, guid: 207bede248af75d449512e2966e2e499, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1778322721}
     - target: {fileID: 2503981807796794749, guid: 207bede248af75d449512e2966e2e499,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1813,18 +1797,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1778322721 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4124394763584300028, guid: 6c40b9267fd993b45bf53c4f0ac71b37,
-    type: 3}
-  m_PrefabInstance: {fileID: 1294842055}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139862622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc20a10e617f448689cd6207010c8e8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1811081201
 PrefabInstance:
   m_ObjectHideFlags: 0
