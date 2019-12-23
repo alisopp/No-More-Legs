@@ -1,3 +1,3 @@
 # No-More-Legs
 
-Play it on [Itch IO](https://calidor.itch.io/no-more-legs)
+Play it on [itch.io](https://calidor.itch.io/no-more-legs)
