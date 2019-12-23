@@ -26,6 +26,8 @@ namespace NoMoreLegs
         private AudioSource _soundEffect;
         private Transform _shooterTransform;
 
+        private bool _isMoving = false;
+
         #endregion
 
         #region UNITY_LIFECYCLE
@@ -36,23 +38,22 @@ namespace NoMoreLegs
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _rigidbody2D.isKinematic = true;
             _positionConstraint = GetComponent<PositionConstraint>();
-            enabled = false;
             _wallLayer = LayerMask.NameToLayer("Wall");
             _soundEffect = GetComponent<AudioSource>();
         }
 
         private void FixedUpdate()
         {
-            if (enabled)
+            if (_isMoving)
             {
                 if ((_startPosition - transform.position).sqrMagnitude > _sqrtMaxRange)
                 {
                     OnHookFailed();
                 }
-                _lineRenderer.SetPosition(0, transform.position);
-                _lineRenderer.SetPosition(1, _shooterTransform.position);
+                
             }
-            
+            _lineRenderer.SetPosition(0, transform.position);
+            _lineRenderer.SetPosition(1, _shooterTransform.position);
             
         }
 
@@ -63,11 +64,10 @@ namespace NoMoreLegs
         private void OnHookFailed()
         {
             _rigidbody2D.velocity = Vector2.zero;
-            _rigidbody2D.isKinematic = true;
+            //_rigidbody2D.isKinematic = true;
             _hookListener.OnFailedReachedPosition();
             //transform.localPosition = Vector3.zero;
             _positionConstraint.constraintActive = true;
-            enabled = false;
             _lineRenderer.enabled = false;
             var position = _shooterTransform.position;
             _lineRenderer.SetPosition(0, position);
@@ -78,7 +78,6 @@ namespace NoMoreLegs
         public void ResetHook()
         {
             _rigidbody2D.velocity = Vector2.zero;
-            _rigidbody2D.isKinematic = true;
             _positionConstraint.constraintActive = true;
             _lineRenderer.enabled = false;
             var position = _shooterTransform.position;
@@ -100,26 +99,26 @@ namespace NoMoreLegs
         public void ShootHook(Vector3 velocity, float sqrtMaxRange)
         {
             _rigidbody2D.velocity = velocity;
-            _rigidbody2D.isKinematic = false;
+            //_rigidbody2D.isKinematic = false;
             _startPosition = transform.position;
             _sqrtMaxRange = sqrtMaxRange;
             _positionConstraint.constraintActive = false;
             float angle = (Mathf.Atan2(velocity.y, velocity.x) + (Mathf.PI / 2.0f)) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, 0, angle - 90);
             _lineRenderer.enabled = true;
-            enabled = true;
+            _isMoving = true;
             _soundEffect.Play();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (enabled)
+            if (_isMoving)
             {
                 if (other.gameObject.layer == _wallLayer)
                 {
                     _rigidbody2D.velocity = Vector2.zero;
-                    _rigidbody2D.isKinematic = true;
-                    enabled = false;
+                    //_rigidbody2D.isKinematic = true;
+                    _isMoving = false;
                     _hookListener.OnHookReachedPosition(other.ClosestPoint(transform.position));
                     Debug.Log("Hook reached");
                 }

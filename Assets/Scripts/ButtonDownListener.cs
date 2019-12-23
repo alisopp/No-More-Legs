@@ -13,6 +13,11 @@ namespace NoMoreLegs
             _movingBehaviour.Init(gameObject);
         }
 
+        public void Reset()
+        {
+            _movingBehaviour.ResetBehaviour();
+        }
+
         public void RunListener()
         {
             if (Input.GetButtonDown(_button))

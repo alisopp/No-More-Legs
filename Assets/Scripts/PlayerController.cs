@@ -33,6 +33,21 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool(hashedAnim, value);
     }
 
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Activate()
+    {
+        
+        if (_playerHookController.enabled)
+        {
+            _playerHookController.ResetHooks();
+        }
+        gameObject.SetActive(true);
+    }
+
     public void StopController()
     {
         var velocity = _rb.velocity;

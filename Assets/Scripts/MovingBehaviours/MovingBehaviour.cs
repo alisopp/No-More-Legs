@@ -37,6 +37,11 @@ namespace NoMoreLegs
         {
             
         }
+
+        public virtual void ResetBehaviour()
+        {
+            
+        }
         
         
 

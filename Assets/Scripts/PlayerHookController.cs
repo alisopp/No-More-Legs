@@ -28,6 +28,14 @@ namespace NoMoreLegs
                 _buttonDownListeners[i].RunListener();
             }
         }
+
+        public void ResetHooks()
+        {
+            for (int i = 0; i < _buttonDownListeners.Length; i++)
+            {
+                _buttonDownListeners[i].RunListener();
+            }
+        }
     }
 
 }

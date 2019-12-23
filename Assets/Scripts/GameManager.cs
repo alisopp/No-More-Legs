@@ -109,7 +109,7 @@ namespace NoMoreLegs
             {
                 EndGame(false);
                 //TODO change to use an animation instead
-                _currentPlayer.gameObject.SetActive(false);
+                _currentPlayer.Deactivate();
                 _gameOverMenu.SetActive(true);
                 
             }
@@ -120,7 +120,7 @@ namespace NoMoreLegs
             _currentPlayer.transform.position = _spawnPoint.GetSpawnPosition();
             _gameOverMenu.SetActive(false);
             StatesManager.Instance.IncreaseTries();
-            _currentPlayer.gameObject.SetActive(true);
+            _currentPlayer.Activate();
         }
 
         public void ResumeGame()
